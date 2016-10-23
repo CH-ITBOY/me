@@ -1,7 +1,8 @@
-﻿#!/bin/bash
+#!/bin/bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
-# wget https://raw.github.com/mu228/me/master/openvpn.sh && bash openvpn.sh 2>&1 | tee openvpn.log
+# wget https://raw.github.com/CH-ITBOY/opsq/master/openvpn.sh && bash openvpn.sh 2>&1 | tee openvpn.log
+MirrorHost = 'https://raw.github.com/CH-ITBOY/opsq/master';
 clear;
 # Logo 	******************************************************************
 CopyrightLogo='
@@ -35,22 +36,22 @@ sleep 3
 
 if [ $version == "5" ];then
 if [ $(getconf LONG_BIT) = '64' ] ; then
-rpm -ivh https://raw.github.com/mu228/me/master/64-epel-release-5-4.noarch.rpm
+rpm -ivh ${MirrorHost}/64-epel-release-5-4.noarch.rpm
 else
-rpm -ivh https://raw.github.com/mu228/me/master/32-epel-release-5-4.noarch.rpm
+rpm -ivh ${MirrorHost}/32-epel-release-5-4.noarch.rpm
 fi
 fi
 
 if [ $version == "6" ];then
 if [ $(getconf LONG_BIT) = '64' ] ; then
-rpm -ivh https://raw.github.com/mu228/me/master/epel-release-6-8.noarch.rpm
+rpm -ivh ${MirrorHost}/epel-release-6-8.noarch.rpm
 else
-rpm -ivh https://raw.github.com/mu228/me/master/32-epel-release-6-8.noarch.rpm
+rpm -ivh ${MirrorHost}/32-epel-release-6-8.noarch.rpm
 fi
 fi
 
 if [ $version == "7" ];then
-rpm -ivh https://raw.github.com/mu228/me/master/epel-release-latest-7.noarch.rpm
+rpm -ivh ${MirrorHost}/epel-release-latest-7.noarch.rpm
 fi
 
 if [ ! $version ];then
@@ -95,7 +96,7 @@ chkconfig iptables on
 setenforce 0
 cd /etc/
 rm -rf ./sysctl.conf
-wget https://raw.github.com/mu228/me/master/sysctl.conf
+wget ${MirrorHost}/sysctl.conf
 sleep 3
 chmod 0755 ./sysctl.conf
 sysctl -p
@@ -110,11 +111,11 @@ yum install -y openvpn
 
 cd /etc/openvpn/
 rm -rf ./server.conf
-wget https://raw.github.com/mu228/me/master/server.conf
+wget ${MirrorHost}/server.conf
 chmod 0755 ./server.conf
 cd /etc/squid/
 rm -f ./squid.conf
-wget https://raw.github.com/mu228/me/master/squid.conf
+wget ${MirrorHost}/squid.conf
 chmod 0755 /etc/squid/squid.conf
 squid -z
 squid -s
@@ -122,7 +123,7 @@ chkconfig squid on
 
 # OpenVPN Installing ****************************************************************************
 cd /etc/openvpn/
-wget https://raw.github.com/mu228/me/master/EasyRSA-2.2.2.tar.gz
+wget ${MirrorHost}/EasyRSA-2.2.2.tar.gz
 tar -zxvf EasyRSA-2.2.2.tar.gz >/dev/null 2>&1
 cd /etc/openvpn/easy-rsa/
 source vars
